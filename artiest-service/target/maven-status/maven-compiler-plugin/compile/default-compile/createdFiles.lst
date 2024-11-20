@@ -1,0 +1,9 @@
+fact\it\artiestservice\dto\ArtiestResponse.class
+fact\it\artiestservice\model\Artiest.class
+fact\it\artiestservice\ArtiestServiceApplication.class
+fact\it\artiestservice\controller\ArtiestController.class
+fact\it\artiestservice\dto\ArtiestRequest.class
+fact\it\artiestservice\model\Artiest$ArtiestBuilder.class
+fact\it\artiestservice\repository\ArtiestRepository.class
+fact\it\artiestservice\service\ArtiestService.class
+fact\it\artiestservice\dto\ArtiestResponse$ArtiestResponseBuilder.class

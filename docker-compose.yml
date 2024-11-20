@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+
+
+  mysql-album:
+    image: mysql:latest
+    ports:
+      - 3307:3306
+    volumes:
+      - mysql_album_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: abc123
+
+  mysql-artiest:
+    image: mysql:latest
+    ports:
+      - 3308:3306
+    volumes:
+      - mysql_artiest_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: abc123
+
+  mysql-winkel:
+    image: mysql:latest
+    ports:
+      - 3309:3306
+    volumes:
+      - mysql_winkel_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: abc123
+
+
+
+
+  artiest-service:
+    depends_on:
+      - mysql-artiest
+    image: niel/artiest-service
+    ports:
+      - 8081:8081
+    volumes:
+      - mysql_artiest_data:/var/lib/mysql
+    environment:
+      MYSQL_DB_HOST: mysql-artiest
+      MYSQL_DB_PORT: 3306
+      MYSQL_DB_USERNAME: root
+      MYSQL_DB_PASSWORD: abc123
+
+  album-service:
+    depends_on:
+      - mysql-album
+    image: niel/album-service
+    ports:
+      - 8082:8082
+    volumes:
+      - mysql_album_data:/var/lib/mysql
+    environment:
+      MYSQL_DB_HOST: mysql-team
+      MYSQL_DB_PORT: 3306
+      MYSQL_DB_USERNAME: root
+      MYSQL_DB_PASSWORD: abc123
+
+  winkel-service:
+    depends_on:
+      - mysql-winkel
+    image: niel/winkel-service
+    ports:
+      - 8083:8083
+    volumes:
+      - mysql_winkel_data:/var/lib/mysql
+    environment:
+      MYSQL_DB_HOST: mysql-winkel
+      MYSQL_DB_PORT: 3306
+      MYSQL_DB_USERNAME: root
+      MYSQL_DB_PASSWORD: abc123
+
+
+volumes:
+    mysql_album_data:
+    mysql_artiest_data:
+    mysql_winkel_data:
