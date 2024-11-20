@@ -14,7 +14,7 @@ public class Artiest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String name;
     private String description;
     private LocalDate dateOfBirth;

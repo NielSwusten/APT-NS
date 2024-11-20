@@ -36,7 +36,7 @@ services:
   artiest-service:
     depends_on:
       - mysql-artiest
-    image: niel/artiest-service
+    image: nielswusten/artiest-service
     ports:
       - 8081:8081
     volumes:
@@ -50,13 +50,13 @@ services:
   album-service:
     depends_on:
       - mysql-album
-    image: niel/album-service
+    image: nielswusten/album-service
     ports:
       - 8082:8082
     volumes:
       - mysql_album_data:/var/lib/mysql
     environment:
-      MYSQL_DB_HOST: mysql-team
+      MYSQL_DB_HOST: mysql-album
       MYSQL_DB_PORT: 3306
       MYSQL_DB_USERNAME: root
       MYSQL_DB_PASSWORD: abc123
@@ -64,7 +64,7 @@ services:
   winkel-service:
     depends_on:
       - mysql-winkel
-    image: niel/winkel-service
+    image: nielswusten/winkel-service
     ports:
       - 8083:8083
     volumes:
