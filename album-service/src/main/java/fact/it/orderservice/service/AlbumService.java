@@ -1,16 +1,10 @@
-package fact.it.albumservice.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import fact.it.albumservice.model.Album;
-import fact.it.albumservice.repository.AlbumRepository;
+import java.util.List;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +16,7 @@ public class AlbumService {
     @PostConstruct
     public void loadData() {
         if (albumRepository.count() == 0) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");  // Adjusted to your format
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-d-M");  // Updated pattern for single digit month/day
 
             // Use LocalDate.parse to parse the release date string
             List<Album> albumList = List.of(
@@ -65,7 +59,7 @@ public class AlbumService {
         }).orElseThrow(() -> new RuntimeException("Album not found"));
     }
 
-    // Delete a album by ID
+    // Delete an album by ID
     public void deleteAlbum(Long id) {
         albumRepository.deleteById(id);
     }
