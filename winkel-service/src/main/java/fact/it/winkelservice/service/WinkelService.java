@@ -37,7 +37,7 @@ public class WinkelService {
         return winkelRepository.findAll();
     }
 
-    public Optional<Winkel> getWinkelById(String id) {
+    public Optional<Winkel> getWinkelById(Long id) {
         return winkelRepository.findById(id);
     }
 

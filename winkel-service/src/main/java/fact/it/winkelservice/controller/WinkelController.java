@@ -24,7 +24,7 @@ public class WinkelController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Winkel> getWinkelById(@PathVariable String id) {
+    public Optional<Winkel> getWinkelById(@PathVariable Long id) {
         return winkelService.getWinkelById(id);
     }
 
