@@ -25,7 +25,7 @@ public class WinkelService {
             List<Winkel> winkelList = List.of(
 
                     new Winkel(null, "mediamarkt"),
-                    new Winkel(null, "ebay"),
+                    new Winkel(null, "ebay")
                     );
 
             winkelRepository.saveAll(winkelList);

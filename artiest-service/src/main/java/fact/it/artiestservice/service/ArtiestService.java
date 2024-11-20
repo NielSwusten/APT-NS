@@ -22,20 +22,19 @@ public class ArtiestService {
     @PostConstruct
     public void loadData() {
         if (artiestRepository.count() <= 0) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");  // Adjusted to your format
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // Correct format
 
-                List<Artiest> artiestList = List.of(
+            List<Artiest> artiestList = List.of(
+                    new Artiest(null, "billy", "the one and only", LocalDate.parse("2001-02-01", formatter)),
+                    new Artiest(null, "jason", "The only singer in town", LocalDate.parse("1993-11-14", formatter)),
+                    new Artiest(null, "todd hill", "lost in space", LocalDate.parse("1989-07-05", formatter)),
+                    new Artiest(null, "bernie", "too old to sing", LocalDate.parse("1952-02-18", formatter)) // No trailing comma
+            );
 
-                        new Artiest(null, "billy", "the one and only", LocalDate.parse("2001-2-1", formatter)),
-                        new Artiest(null, "jason", "The only singer in town", LocalDate.parse("1993-14-11", formatter)),
-                        new Artiest(null, "todd hill", "lost in space", LocalDate.parse("1989-7-5", formatter)),
-                        new Artiest(null, "bernie", "to old to sing", LocalDate.parse("1952-18-2", formatter)),
-                );
-
-                artiestRepository.saveAll(artiestList);
-
+            artiestRepository.saveAll(artiestList);
         }
     }
+
 
     public List<Artiest> getArtiests(){
         return artiestRepository.findAll();
