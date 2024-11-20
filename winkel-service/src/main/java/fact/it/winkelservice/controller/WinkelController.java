@@ -1,25 +1,36 @@
 package fact.it.winkelservice.controller;
 
-import fact.it.winkelservice.dto.WinkelResponse;
+
+import fact.it.winkelservice.model.Winkel;
 import fact.it.winkelservice.service.WinkelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/winkel")
 @RequiredArgsConstructor
 public class WinkelController {
-
     private final WinkelService winkelService;
 
-    // http://localhost:8082/api/winkel?skuCode=tube6in&skuCode=beam10ft
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<WinkelResponse> isInStock
-    (@RequestParam List<String> skuCode) {
-        return winkelService.isInStock(skuCode);
+    public List<Winkel> getAllWinkels(){
+        return winkelService.getWinkels();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<Winkel> getWinkelById(@PathVariable String id) {
+        return winkelService.getWinkelById(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void addWinkel(@RequestBody Winkel winkel) {
+        winkelService.addWinkel(winkel);
     }
 }

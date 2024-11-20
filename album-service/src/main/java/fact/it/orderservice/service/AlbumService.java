@@ -26,13 +26,13 @@ public class AlbumService {
 
             // Use LocalDate.parse to parse the release date string
             List<Album> albumList = List.of(
-                    new Album(1, "2", "Break", LocalDate.parse("2006-21-10", formatter)),
-                    new Album(2, "1", "The one", LocalDate.parse("1993-14-11", formatter)),
-                    new Album(3, "1", "final count", LocalDate.parse("1989-5-5", formatter)),
-                    new Album(4, "3", "dusk til dawn", LocalDate.parse("1999-8-1", formatter)),
-                    new Album(5, "3", "breakout", LocalDate.parse("2005-8-12", formatter)),
-                    new Album(6, "2", "dance off", LocalDate.parse("1999-18-10", formatter)),
-                    new Album(7, "4", "fall off", LocalDate.parse("1999-18-2", formatter))
+                    new Album(null, "2", "Break", LocalDate.parse("2006-21-10", formatter)),
+                    new Album(null, "1", "The one", LocalDate.parse("1993-14-11", formatter)),
+                    new Album(null, "1", "final count", LocalDate.parse("1989-5-5", formatter)),
+                    new Album(null, "3", "dusk til dawn", LocalDate.parse("1999-8-1", formatter)),
+                    new Album(null, "3", "breakout", LocalDate.parse("2005-8-12", formatter)),
+                    new Album(null, "2", "dance off", LocalDate.parse("1999-18-10", formatter)),
+                    new Album(null, "4", "fall off", LocalDate.parse("1999-18-2", formatter))
             );
 
             albumRepository.saveAll(albumList);

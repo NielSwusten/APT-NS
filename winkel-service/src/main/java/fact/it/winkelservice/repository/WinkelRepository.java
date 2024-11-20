@@ -11,5 +11,4 @@ import java.util.List;
 @Repository
 @Transactional
 public interface WinkelRepository extends JpaRepository<Winkel, Long> {
-    List<Winkel> findBySkuCodeIn(List<String> skuCode);
 }
