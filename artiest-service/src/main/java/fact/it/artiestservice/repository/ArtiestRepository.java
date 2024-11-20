@@ -1,9 +1,8 @@
 package fact.it.artiestservice.repository;
 
 import fact.it.artiestservice.model.Artiest;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface ArtiestRepository extends MongoRepository<Artiest, String> {
+public interface ArtiestRepository extends JpaRepository<Artiest, Long> {
+    // JPA Repository provides CRUD and custom query capabilities
 }
