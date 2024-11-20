@@ -22,17 +22,17 @@ public class AlbumService {
     @PostConstruct
     public void loadData() {
         if (albumRepository.count() == 0) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");  // Adjusted to your format
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // Correct format
 
             // Use LocalDate.parse to parse the release date string
             List<Album> albumList = List.of(
-                    new Album(null, "2", "Break", LocalDate.parse("2006-21-10", formatter)),
-                    new Album(null, "1", "The one", LocalDate.parse("1993-14-11", formatter)),
-                    new Album(null, "1", "final count", LocalDate.parse("1989-05-05", formatter)),
-                    new Album(null, "3", "dusk til dawn", LocalDate.parse("1999-08-01", formatter)),
+                    new Album(null, "2", "Break", LocalDate.parse("2006-10-1", formatter)),
+                    new Album(null, "1", "The one", LocalDate.parse("1993-1-15", formatter)),
+                    new Album(null, "1", "final count", LocalDate.parse("1989-05-06", formatter)),
+                    new Album(null, "3", "dusk til dawn", LocalDate.parse("1999-09-01", formatter)),
                     new Album(null, "3", "breakout", LocalDate.parse("2005-08-12", formatter)),
-                    new Album(null, "2", "dance off", LocalDate.parse("1999-18-10", formatter)),
-                    new Album(null, "4", "fall off", LocalDate.parse("1999-18-02", formatter))
+                    new Album(null, "2", "dance off", LocalDate.parse("1999-10-10", formatter)),
+                    new Album(null, "4", "fall off", LocalDate.parse("1999-8-02", formatter))
             );
 
             albumRepository.saveAll(albumList);
