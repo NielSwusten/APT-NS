@@ -12,14 +12,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: abc123
 
-  mysql-artiest:
-    image: mysql:latest
-    ports:
-      - 3308:3306
-    volumes:
-      - mysql_artiest_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: abc123
 
   mysql-winkel:
     image: mysql:latest
@@ -31,21 +23,24 @@ services:
       MYSQL_ROOT_PASSWORD: abc123
 
 
-
+  mysql-artiest:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_artiest_data:/data/db
 
   artiest-service:
     depends_on:
-      - mysql-artiest
+      - mongo-artiest
     image: nielswusten/artiest-service
     ports:
       - 8081:8081
     volumes:
-      - mysql_artiest_data:/var/lib/mysql
+      - mongodb_artiest_data:/data/db
     environment:
-      MYSQL_DB_HOST: mysql-artiest
-      MYSQL_DB_PORT: 3306
-      MYSQL_DB_USERNAME: root
-      MYSQL_DB_PASSWORD: abc123
+      MONGODB_PORT: 27017
+      MONGODB_HOST: mongo-artiest
 
   album-service:
     depends_on:
@@ -78,5 +73,5 @@ services:
 
 volumes:
     mysql_album_data:
-    mysql_artiest_data:
+    mongodb_artiest_data:
     mysql_winkel_data:
