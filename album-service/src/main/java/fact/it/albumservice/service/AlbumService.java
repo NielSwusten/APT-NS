@@ -22,7 +22,7 @@ public class AlbumService {
     @PostConstruct
     public void loadData() {
         if (albumRepository.count() == 0) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");  // Correct format
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");  // Correct format
 
             // Use LocalDate.parse to parse the release date string
             List<Album> albumList = List.of(
