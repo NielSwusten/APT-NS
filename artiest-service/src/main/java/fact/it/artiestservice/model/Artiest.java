@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Artiest {
 
     @Id
-    private Long id;
+    private int id;
     private String name;
     private String description;
     private LocalDate dateOfBirth;
