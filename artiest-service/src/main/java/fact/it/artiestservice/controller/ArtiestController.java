@@ -24,7 +24,7 @@ public class ArtiestController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Artiest> getArtiestById(@PathVariable Long id) {
+    public Optional<Artiest> getArtiestById(@PathVariable String id) {
         return artiestService.getArtiestById(id);
     }
 
