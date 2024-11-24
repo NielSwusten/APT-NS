@@ -4,8 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
 
-@Entity // Marks this as a JPA entity
-@Table(name = "artiest") // Specifies the table name in the database
+
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document(collection = "artiest")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -13,7 +18,6 @@ import java.time.LocalDate;
 public class Artiest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;

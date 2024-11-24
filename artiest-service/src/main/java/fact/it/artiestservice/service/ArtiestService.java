@@ -25,10 +25,10 @@ public class ArtiestService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // Correct format
 
             List<Artiest> artiestList = List.of(
-                    new Artiest(null, "billy", "the one and only", LocalDate.parse("2001-02-01", formatter)),
-                    new Artiest(null, "jason", "The only singer in town", LocalDate.parse("1993-11-14", formatter)),
-                    new Artiest(null, "todd hill", "lost in space", LocalDate.parse("1989-07-05", formatter)),
-                    new Artiest(null, "bernie", "too old to sing", LocalDate.parse("1952-02-18", formatter)) // No trailing comma
+                    new Artiest(1, "billy", "the one and only", LocalDate.parse("2001-02-01", formatter)),
+                    new Artiest(2, "jason", "The only singer in town", LocalDate.parse("1993-11-14", formatter)),
+                    new Artiest(3, "todd hill", "lost in space", LocalDate.parse("1989-07-05", formatter)),
+                    new Artiest(4, "bernie", "too old to sing", LocalDate.parse("1952-02-18", formatter)) // No trailing comma
             );
 
             artiestRepository.saveAll(artiestList);
