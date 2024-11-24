@@ -40,7 +40,7 @@ public class ArtiestService {
         return artiestRepository.findAll();
     }
 
-    public Optional<Artiest> getArtiestById(Long id) {
+    public Optional<Artiest> getArtiestById(String id) {
         return artiestRepository.findById(id);
     }
 
