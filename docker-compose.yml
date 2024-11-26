@@ -5,6 +5,7 @@ services:
 
   mysql-album:
     image: mysql:latest
+    pull_policy: always
     ports:
       - 3307:3306
     volumes:
@@ -15,6 +16,7 @@ services:
 
   mysql-winkel:
     image: mysql:latest
+    pull_policy: always
     ports:
       - 3309:3306
     volumes:
@@ -25,6 +27,7 @@ services:
 
   mongo-artiest:
     image: mongo:latest
+    pull_policy: always
     ports:
       - 27017:27017
     volumes:
@@ -34,6 +37,7 @@ services:
     depends_on:
       - mongo-artiest
     image: nielswusten/artiest-service
+    pull_policy: always
     ports:
       - 8081:8081
     volumes:
@@ -46,6 +50,7 @@ services:
     depends_on:
       - mysql-album
     image: nielswusten/album-service
+    pull_policy: always
     ports:
       - 8082:8082
     volumes:
@@ -60,6 +65,7 @@ services:
     depends_on:
       - mysql-winkel
     image: nielswusten/winkel-service
+    pull_policy: always
     ports:
       - 8083:8083
     volumes:
