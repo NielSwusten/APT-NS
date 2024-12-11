@@ -77,7 +77,22 @@ services:
       MYSQL_DB_PASSWORD: abc123
 
 
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - 80:8080
+    depends_on:
+      - artiest-service
+      - album-service
+      - winkel-service
+
+
 volumes:
     mysql_album_data:
     mongodb_artiest_data:
     mysql_winkel_data:
+
+
+
