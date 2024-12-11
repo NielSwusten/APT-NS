@@ -1,3 +1,3 @@
-FROM openjdk:17-jdk-slim
+FROM openjdk:17-jdk-alpine
 ADD target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "/api-gateway.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
