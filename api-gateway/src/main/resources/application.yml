@@ -1,16 +1,16 @@
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: artiest-service
-          uri: http://artiest-service:8081
-          predicates:
-            - Path=/artiest/**
-        - id: album-service
-          uri: http://album-service:8082
-          predicates:
-            - Path=/album/**
-        - id: winkel-service
-          uri: http://winkel-service:8083
-          predicates:
-            - Path=/winkel/**
+  spring:
+    cloud:
+      gateway:
+        routes:
+          - id: artiest-service
+            uri: http://artiest-service:8081
+            predicates:
+              - Path=/artiest/**
+          - id: album-service
+            uri: http://album-service:8082
+            predicates:
+              - Path=/album/**
+          - id: winkel-service
+            uri: http://winkel-service:8083
+            predicates:
+              - Path=/winkel/**
