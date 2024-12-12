@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/artiest")
+@RequestMapping("/artiest")
 @RequiredArgsConstructor
 public class ArtiestController {
     private final ArtiestService artiestService;
