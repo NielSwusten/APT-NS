@@ -1,26 +1,23 @@
-package fact.it.apigateway.config;
-
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
-import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.web.server.SecurityWebFilterChain;
-
-import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/album/**").authenticated()
-                .anyRequest().authenticated()
-                .and()
-                .oauth2ResourceServer().jwt();
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/actuator/**").permitAll()  // Permit actuator endpoints
+                        .requestMatchers(HttpMethod.GET, "/album/**").authenticated()  // Require auth for album
+                        .anyRequest().authenticated()  // All other endpoints require authentication
+                )
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .jwt()  // Use JWT for OAuth2 authentication
+                );
+
+        return http.build();
     }
 }
-
