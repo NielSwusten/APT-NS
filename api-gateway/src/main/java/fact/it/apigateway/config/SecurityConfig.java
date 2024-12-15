@@ -1,24 +1,30 @@
-import org.springframework.context.annotation.Bean;
+package fact.it.apigateway.config;
+
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;  // Import this for HttpMethod
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
+@EnableWebFluxSecurity
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/actuator/**").permitAll()  // Permit actuator endpoints
-                        .requestMatchers(HttpMethod.GET, "/album/**").authenticated()  // Require auth for album GET
-                        .anyRequest().authenticated()  // All other endpoints require authentication
+    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
+        serverHttpSecurity
+                .authorizeExchange(exchange ->
+                        exchange.pathMatchers(HttpMethod.GET,"/album")
+                                .permitAll()
+                                .anyExchange()
+                                .authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt()  // Use JWT for OAuth2 authentication
+                        .jwt(withDefaults())
                 );
-
-        return http.build();
+        return serverHttpSecurity.build();
     }
 }
