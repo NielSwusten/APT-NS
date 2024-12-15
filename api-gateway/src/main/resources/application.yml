@@ -22,6 +22,9 @@
             uri: http://album-service:8082
             predicates:
               - Path=/album/**
+            filters:
+              - RemoveRequestHeader=Authorization
+              - AddRequestHeader=Authorization, Bearer ${token}
           - id: winkel-service
             uri: http://winkel-service:8083
             predicates:

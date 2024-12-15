@@ -10,21 +10,17 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
-@EnableWebFluxSecurity
-public class SecurityConfig {
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
-        serverHttpSecurity
-                .authorizeExchange(exchange ->
-                        exchange.pathMatchers(HttpMethod.GET,"/album")
-                                .permitAll()
-                                .anyExchange()
-                                .authenticated()
-                )
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(withDefaults())
-                );
-        return serverHttpSecurity.build();
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/album/**").authenticated()
+                .anyRequest().authenticated()
+                .and()
+                .oauth2ResourceServer().jwt();
     }
 }
+
