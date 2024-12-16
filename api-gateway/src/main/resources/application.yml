@@ -28,3 +28,4 @@
               - Path=/winkel
             filters:
               - SetPath=/winkel
+              - SecureAllRoutes
