@@ -17,10 +17,9 @@ public class SecurityConfig {
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
         serverHttpSecurity
                 .authorizeExchange(exchange ->
-                        exchange.pathMatchers(HttpMethod.GET,"/album")
-                                .permitAll()
-                                .anyExchange()
-                                .authenticated()
+                        exchange.pathMatchers(HttpMethod.GET, "/album").permitAll() // Allow unauthenticated GET to /album
+                                .pathMatchers("/winkel/**").authenticated() // Protect all /winkel/** routes
+                                .anyExchange().authenticated() // Require authentication for all other routes
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(withDefaults())
