@@ -27,4 +27,4 @@
             predicates:
               - Path=/winkel
             filters:
-              - SetPath=/api/winkel
+              - SetPath=/winkel
