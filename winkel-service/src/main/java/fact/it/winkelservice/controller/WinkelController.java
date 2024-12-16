@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-//@RequestMapping("/api/winkel")
-@RequestMapping("/winkel")
+@RequestMapping("/api/winkel")
 
 @RequiredArgsConstructor
 public class WinkelController {
