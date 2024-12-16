@@ -14,25 +14,17 @@
     cloud:
       gateway:
         routes:
-          - id: winkel-service-get-all
+          - id: artiest-service
+            uri: http://artiest-service:8081
+            predicates:
+              - Path=artiest/**
+          - id: album-service
+            uri: http://album-service:8082
+            predicates:
+              - Path=/album/**
+          - id: winkel-service
             uri: http://winkel-service:8083
             predicates:
               - Path=/winkel
-              - Method=GET
             filters:
-              - SetPath=/api/winkel
-          - id: winkel-service-get-by-id
-            uri: http://winkel-service:8083
-            predicates:
-              - Path=/winkel/{id}
-              - Method=GET
-            filters:
-              - SetPath=/api/winkel/{id}
-          - id: winkel-service-post
-            uri: http://winkel-service:8083
-            predicates:
-              - Path=/winkel
-              - Method=POST
-            filters:
-              - SetPath=/api/winkel
-
+              - SetPath=/winkel
