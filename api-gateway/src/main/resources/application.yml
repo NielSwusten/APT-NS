@@ -26,6 +26,5 @@
             uri: http://winkel-service:8083
             predicates:
               - Path=/winkel
-              - Method=GET
             filters:
               - SetPath=/api/winkel
