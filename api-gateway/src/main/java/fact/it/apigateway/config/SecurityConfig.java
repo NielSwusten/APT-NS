@@ -8,18 +8,21 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @Configuration
 @EnableWebFluxSecurity
+@Configuration
+@EnableWebFluxSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
         serverHttpSecurity
                 .authorizeExchange(exchange ->
-                        exchange.pathMatchers("/products").permitAll()  // Allow unauthenticated access to /products
-                                .pathMatchers("/winkel").authenticated()  // Secure /winkel route
-                                .anyExchange().authenticated()  // Secure any other route
+                        exchange.pathMatchers(HttpMethod.GET,"/album")
+                                .permitAll()
+                                .anyExchange()
+                                .authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt()  // Enable JWT-based authentication
+                        .jwt(withDefaults())
                 );
         return serverHttpSecurity.build();
     }

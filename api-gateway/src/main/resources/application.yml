@@ -4,8 +4,8 @@
         client:
           registration:
             google:
-              client-id: 390971080892-aq334h72jejri8gl34jt6qaalrr9497i.apps.googleusercontent.com
-              client-secret: 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
+              client-id: ${GOOGLE_CLIENTID}
+              client-secret: ${GOOGLE_CLIENTSECRET}
               scope: openid,profile,email
         resourceserver:
           jwt:
@@ -14,18 +14,18 @@
     cloud:
       gateway:
         routes:
-          - id: artiest-service
-            uri: http://artiest-service:8081
-            predicates:
-              - Path=artiest/**
           - id: album-service
-            uri: http://album-service:8082
+            uri: http://album-service:localhost:8081
             predicates:
-              - Path=/album/**
+              - Path=/album/
+              - Method=GET
+            filters:
+              - SetPath=/album
+
           - id: winkel-service
-            uri: http://winkel-service:8083
+            uri: http://winkel-service:localhost:8083
             predicates:
               - Path=/winkel
             filters:
               - SetPath=/winkel
-              - SecureAllRoutes
+
