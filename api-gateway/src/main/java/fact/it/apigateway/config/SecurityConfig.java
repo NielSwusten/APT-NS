@@ -1,5 +1,5 @@
-package fact.it.apigateway.config;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -13,8 +13,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebFluxSecurity
 public class SecurityConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
+
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
+        logger.info("Configuring security filter chain");
         serverHttpSecurity
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers(HttpMethod.GET, "/album").permitAll()
