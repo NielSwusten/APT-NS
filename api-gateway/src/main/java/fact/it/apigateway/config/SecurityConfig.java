@@ -22,13 +22,13 @@ public class SecurityConfig {
                         .permitAll()
 
                         // Secure PUT, POST, and DELETE requests for /album, /winkel, and /artiest
-                        .pathMatchers(HttpMethod.PUT, "/album", "/winkel", "/artiest")
+                        .pathMatchers(HttpMethod.PUT, "/album/", "/winkel/", "/artiest/")
                         .authenticated()
 
-                        .pathMatchers(HttpMethod.POST, "/album", "/winkel", "/artiest")
+                        .pathMatchers(HttpMethod.POST, "/album/", "/winkel/", "/artiest/")
                         .authenticated()
 
-                        .pathMatchers(HttpMethod.DELETE, "/album", "/winkel", "/artiest")
+                        .pathMatchers(HttpMethod.DELETE, "/album/", "/winkel/", "/artiest/")
                         .authenticated()
 
                         // Require authentication for all other routes
