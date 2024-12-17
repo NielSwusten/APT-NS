@@ -21,13 +21,6 @@ spring:
           filters:
             - SetPath=/album
             -
-        - id: album-service-id
-          uri: http://${ALBUM_SERVICE_BASEURL:localhost:8082}
-          predicates:
-            - Path=/album/**  # Match any path starting with /album (e.g., /album/1, /album/2)
-          filters:
-            - SetPath=/album/#{variable} # Forward the dynamic part of the path to the backend
-
 
         - id: winkel-service
           uri: http://${WINKEL_SERVICE_BASEURL:localhost:8083}
