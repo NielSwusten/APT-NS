@@ -16,11 +16,10 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
         serverHttpSecurity
-                .authorizeExchange(exchange ->
-                        exchange.pathMatchers(HttpMethod.GET,"/album")
-                                .permitAll()
-                                .anyExchange()
-                                .authenticated()
+                .authorizeExchange(exchange -> exchange
+                        .pathMatchers(HttpMethod.GET, "/album").permitAll()
+                        .pathMatchers(HttpMethod.GET, "/winkel").authenticated() // Secure /winkel
+                        .anyExchange().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(withDefaults())
