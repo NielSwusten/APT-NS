@@ -20,7 +20,7 @@ spring:
             - Path=/album
           filters:
             - SetPath=/album
-            -
+
 
         - id: winkel-service
           uri: http://${WINKEL_SERVICE_BASEURL:localhost:8083}
