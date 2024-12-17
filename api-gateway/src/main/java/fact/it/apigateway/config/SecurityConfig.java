@@ -22,6 +22,7 @@ public class SecurityConfig {
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers(HttpMethod.GET, "/album").permitAll()
                         .pathMatchers(HttpMethod.GET, "/winkel").authenticated() // Secure /winkel
+                        .pathMatchers(HttpMethod.GET, "/artiest").authenticated() // Secure /winkel
                         .anyExchange().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
