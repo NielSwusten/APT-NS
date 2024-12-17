@@ -89,6 +89,9 @@ services:
       - artiest-service
       - album-service
       - winkel-service
+    environment:
+      ALBUM_SERVICE_BASEURL: album-service:8082
+      WINKEL_INFO_SERVICE_BASEURL: winkel-service:8083
 
 
 volumes:

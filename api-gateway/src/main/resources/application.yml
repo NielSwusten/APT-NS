@@ -15,7 +15,7 @@
       gateway:
         routes:
           - id: album-service
-            uri: http://album-service:localhost:8081
+            uri: http://${ALBUM_SERVICE_BASEURL:localhost:8082}
             predicates:
               - Path=/album/
               - Method=GET
@@ -23,7 +23,7 @@
               - SetPath=/album
 
           - id: winkel-service
-            uri: http://winkel-service:localhost:8083
+            uri: http://${WINKEL_SERVICE_BASEURL:localhost:8083}
             predicates:
               - Path=/winkel/
             filters:
