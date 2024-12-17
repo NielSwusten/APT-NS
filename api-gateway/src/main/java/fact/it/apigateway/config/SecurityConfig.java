@@ -17,12 +17,12 @@ public class SecurityConfig {
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
         serverHttpSecurity
                 .authorizeExchange(exchange -> exchange
-                        .pathMatchers(HttpMethod.GET, "/album").permitAll() // Allow public access to /album
-                        .pathMatchers("/winkel").authenticated() // Require authentication for /winkel
-                        .anyExchange().authenticated() // Protect other endpoints by default
+                        .pathMatchers(HttpMethod.GET, "/album").permitAll()
+                        .pathMatchers(HttpMethod.GET, "/winkel").permitAll()
+                        .anyExchange().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(withDefaults()) // Enable JWT-based authentication
+                        .jwt(withDefaults())
                 );
         return serverHttpSecurity.build();
     }
