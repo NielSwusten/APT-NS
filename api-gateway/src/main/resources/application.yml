@@ -17,20 +17,26 @@ spring:
         - id: album-service
           uri: http://${ALBUM_SERVICE_BASEURL:localhost:8082}
           predicates:
+            - Path=/album
+          filters:
+            - SetPath=/album
+        - id: album-service-id
+          uri: http://${ALBUM_SERVICE_BASEURL:localhost:8082}
+          predicates:
             - Path=/album/**
           filters:
-            - SetPath=/album/{segment}
+            - SetPath=/album/{segment}  # Ensure the path is forwarded as expected
 
         - id: winkel-service
           uri: http://${WINKEL_SERVICE_BASEURL:localhost:8083}
           predicates:
-            - Path=/winkel/**
+            - Path=/winkel
           filters:
-            - SetPath=/winkel/{segment}
+            - SetPath=/winkel
 
         - id: artiest-service
           uri: http://${ARTIEST_SERVICE_BASEURL:localhost:8081}
           predicates:
-            - Path=/artiest/**
+            - Path=/artiest
           filters:
-            - SetPath=/artiest/{segment}
+            - SetPath=/artiest
