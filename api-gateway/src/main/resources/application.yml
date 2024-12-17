@@ -26,8 +26,7 @@ spring:
           uri: http://${WINKEL_SERVICE_BASEURL:localhost:8083}
           predicates:
             - Path=/winkel/**
-          filters:
-            - SetPath=/winkel
+
 
         - id: artiest-service
           uri: http://${ARTIEST_SERVICE_BASEURL:localhost:8081}
