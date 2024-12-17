@@ -17,7 +17,7 @@
           - id: album-service
             uri: http://${ALBUM_SERVICE_BASEURL:localhost:8082}
             predicates:
-              - Path=/album/
+              - Path=/album
               - Method=GET
             filters:
               - SetPath=/album
@@ -25,8 +25,6 @@
           - id: winkel-service
             uri: http://${WINKEL_SERVICE_BASEURL:localhost:8083}
             predicates:
-              - Path=/winkel/
+              - Path=/winkel
             filters:
               - SetPath=/winkel
-
-#test
