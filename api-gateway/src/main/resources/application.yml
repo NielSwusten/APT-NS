@@ -1,30 +1,36 @@
-  spring:
-    security:
-      oauth2:
-        client:
-          registration:
-            google:
-              client-id: ${GOOGLE_CLIENTID}
-              client-secret: ${GOOGLE_CLIENTSECRET}
-              scope: openid,profile,email
-        resourceserver:
-          jwt:
-            issuer-uri: https://accounts.google.com
-            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
-    cloud:
-      gateway:
-        routes:
-          - id: album-service
-            uri: http://${ALBUM_SERVICE_BASEURL:localhost:8082}
-            predicates:
-              - Path=/album
-              - Method=GET
-            filters:
-              - SetPath=/album
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENTID}
+            client-secret: ${GOOGLECLIENTSECRET}
+            scope: openid,profile,email
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+  cloud:
+    gateway:
+      routes:
+        - id: album-service
+          uri: http://${ALBUM_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/album
+          filters:
+            - SetPath=/album
 
-          - id: winkel-service
-            uri: http://${WINKEL_SERVICE_BASEURL:localhost:8083}
-            predicates:
-              - Path=/winkel
-            filters:
-              - SetPath=/winkel
+        - id: winkel-service
+          uri: http://${WINKEL_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/winkel
+          filters:
+            - SetPath=/winkel
+
+        - id: artiest-service
+          uri: http://${ARTIEST_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/artiest
+          filters:
+            - SetPath=/artiest
