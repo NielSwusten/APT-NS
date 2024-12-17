@@ -78,6 +78,8 @@ services:
 
 
   api-gateway:
+    image: nielswusten/api-gateway
+    pull_policy: always
     build:
       context: ./api-gateway
       dockerfile: Dockerfile

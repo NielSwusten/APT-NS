@@ -25,7 +25,7 @@
           - id: winkel-service
             uri: http://winkel-service:localhost:8083
             predicates:
-              - Path=/winkel/**
+              - Path=/winkel/
             filters:
               - SetPath=/winkel
 
