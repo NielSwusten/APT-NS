@@ -19,18 +19,18 @@ spring:
           predicates:
             - Path=/album/**
           filters:
-            - SetPath=/album/**
+            - SetPath=/album/{segment}
 
         - id: winkel-service
           uri: http://${WINKEL_SERVICE_BASEURL:localhost:8083}
           predicates:
             - Path=/winkel/**
           filters:
-            - SetPath=/winkel/**
+            - SetPath=/winkel/{segment}
 
         - id: artiest-service
           uri: http://${ARTIEST_SERVICE_BASEURL:localhost:8081}
           predicates:
             - Path=/artiest/**
           filters:
-            - SetPath=/artiest/**
+            - SetPath=/artiest/{segment}
