@@ -16,17 +16,11 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
         serverHttpSecurity
-                .authorizeExchange(exchange -> exchange
-                        // Permit all GET requests to specific endpoints
-                        .pathMatchers(HttpMethod.GET, "/album", "/winkel", "/artiest").permitAll()
-
-                        // Require authentication for POST, PUT, and DELETE
-                        .pathMatchers(HttpMethod.POST, "/album/**", "/winkel/**", "/artiest/**").authenticated()
-                        .pathMatchers(HttpMethod.PUT, "/album/**", "/winkel/**", "/artiest/**").authenticated()
-                        .pathMatchers(HttpMethod.DELETE, "/album/**", "/winkel/**", "/artiest/**").authenticated()
-
-                        // Any other request will require authentication
-                        .anyExchange().authenticated()
+                .authorizeExchange(exchange ->
+                        exchange.pathMatchers(HttpMethod.GET,"/album")
+                                .permitAll()
+                                .anyExchange()
+                                .authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(withDefaults())
