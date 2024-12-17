@@ -17,9 +17,7 @@ spring:
         - id: album-service
           uri: http://${ALBUM_SERVICE_BASEURL:localhost:8082}
           predicates:
-            - Path=/album
-          filters:
-            - SetPath=/album
+            - Path=/album/**
 
 
         - id: winkel-service
@@ -27,11 +25,9 @@ spring:
           predicates:
             - Path=/winkel/**
 
-
         - id: artiest-service
           uri: http://${ARTIEST_SERVICE_BASEURL:localhost:8081}
           predicates:
-            - Path=/artiest
-          filters:
-            - SetPath=/artiest
+            - Path=/artiest/**
+
 
