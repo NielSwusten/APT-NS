@@ -1,7 +1,7 @@
 package fact.it.albumservice.service;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
+import fact.it.albumservice.dto.AlbumRequest;
+import fact.it.albumservice.dto.AlbumResponse;
 import fact.it.albumservice.model.Album;
 import fact.it.albumservice.repository.AlbumRepository;
 import jakarta.annotation.PostConstruct;
@@ -9,8 +9,11 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +27,6 @@ public class AlbumService {
         if (albumRepository.count() == 0) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-            // Use LocalDate.parse to parse the release date string
             List<Album> albumList = List.of(
                     new Album(null, "2", "Break", LocalDate.parse("2006-10-01", formatter)),
                     new Album(null, "1", "The one", LocalDate.parse("1993-01-15", formatter)),
@@ -40,33 +42,52 @@ public class AlbumService {
     }
 
     // Get all albums
-    public List<Album> getAllAlbums() {
-        return albumRepository.findAll();
+    public List<AlbumResponse> getAllAlbums() {
+        return albumRepository.findAll().stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
     }
 
     // Get a single album by ID
-    public Optional<Album> getAlbumById(Long id) {
-        return albumRepository.findById(id);
+    public Optional<AlbumResponse> getAlbumById(Long id) {
+        return albumRepository.findById(id).map(this::mapToDto);
     }
 
     // Create a new album
-    public Album saveAlbum(Album album) {
-        return albumRepository.save(album);
+    public AlbumResponse saveAlbum(AlbumRequest albumRequest) {
+        Album album = mapToEntity(albumRequest);
+        Album savedAlbum = albumRepository.save(album);
+        return mapToDto(savedAlbum);
     }
 
     // Update an existing album
-    public Album updateAlbum(Long id, Album updatedAlbum) {
+    public AlbumResponse updateAlbum(Long id, AlbumRequest albumRequest) {
         return albumRepository.findById(id).map(album -> {
-            album.setAlbumName(updatedAlbum.getAlbumName());
-            album.setReleaseDate(updatedAlbum.getReleaseDate());
-            album.setArtiestId(updatedAlbum.getArtiestId());
+            album.setAlbumName(albumRequest.getAlbumName());
+            album.setReleaseDate(albumRequest.getReleaseDate());
+            album.setArtiestId(albumRequest.getArtiestId());
 
-            return albumRepository.save(album);
+            Album updatedAlbum = albumRepository.save(album);
+            return mapToDto(updatedAlbum);
         }).orElseThrow(() -> new RuntimeException("Album not found"));
     }
 
-    // Delete a album by ID
+    // Delete an album by ID
     public void deleteAlbum(Long id) {
         albumRepository.deleteById(id);
+    }
+
+    // Helper methods
+    private AlbumResponse mapToDto(Album album) {
+        return AlbumResponse.builder()
+                .id(album.getId())
+                .artiestId(album.getArtiestId())
+                .albumName(album.getAlbumName())
+                .releaseDate(album.getReleaseDate())
+                .build();
+    }
+
+    private Album mapToEntity(AlbumRequest albumRequest) {
+        return new Album(null, albumRequest.getArtiestId(), albumRequest.getAlbumName(), albumRequest.getReleaseDate());
     }
 }

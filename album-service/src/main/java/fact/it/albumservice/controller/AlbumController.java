@@ -1,13 +1,13 @@
 package fact.it.albumservice.controller;
 
-import fact.it.albumservice.model.Album;
+import fact.it.albumservice.dto.AlbumRequest;
+import fact.it.albumservice.dto.AlbumResponse;
 import fact.it.albumservice.service.AlbumService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/album")
@@ -18,36 +18,36 @@ public class AlbumController {
 
     // Get all albums
     @GetMapping
-    public List<Album> getAllAlbums() {
+    public List<AlbumResponse> getAllAlbums() {
         return albumService.getAllAlbums();
     }
 
-    // Get a album by ID
+    // Get an album by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Album> getAlbumById(@PathVariable Long id) {
-        Optional<Album> album = albumService.getAlbumById(id);
-        return album.map(ResponseEntity::ok)
+    public ResponseEntity<AlbumResponse> getAlbumById(@PathVariable Long id) {
+        return albumService.getAlbumById(id)
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     // Create a new album
     @PostMapping
-    public Album createAlbum(@RequestBody Album album) {
-        return albumService.saveAlbum(album);
+    public AlbumResponse createAlbum(@RequestBody AlbumRequest albumRequest) {
+        return albumService.saveAlbum(albumRequest);
     }
 
     // Update an existing album
     @PutMapping("/{id}")
-    public ResponseEntity<Album> updateAlbum(@PathVariable Long id, @RequestBody Album updatedAlbum) {
+    public ResponseEntity<AlbumResponse> updateAlbum(@PathVariable Long id, @RequestBody AlbumRequest albumRequest) {
         try {
-            Album album = albumService.updateAlbum(id, updatedAlbum);
-            return ResponseEntity.ok(album);
+            AlbumResponse albumResponse = albumService.updateAlbum(id, albumRequest);
+            return ResponseEntity.ok(albumResponse);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    // Delete a album
+    // Delete an album
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAlbum(@PathVariable Long id) {
         albumService.deleteAlbum(id);
