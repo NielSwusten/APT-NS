@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArtiestResponse {
-    private String id;
+    private Long id;
     private String name;
     private String description;
     private LocalDate dateOfBirth;
