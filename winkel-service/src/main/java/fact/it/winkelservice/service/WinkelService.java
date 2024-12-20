@@ -18,16 +18,20 @@ public class WinkelService {
 
     private final WinkelRepository winkelRepository;
 
+    public void clearAllData() {
+        winkelRepository.deleteAll();
+    }
+
     @PostConstruct
     public void loadData() {
-        if (winkelRepository.count() <= 0) {
-            List<Winkel> winkelList = List.of(
-                    new Winkel(null, "mediamarkt", 1L),
-                    new Winkel(null, "ebay", 2L)
-            );
+        clearAllData(); // Ensure all old data is removed before loading new data
 
-            winkelRepository.saveAll(winkelList);
-        }
+        List<Winkel> winkelList = List.of(
+                new Winkel(null, "mediamarkt", 1L),
+                new Winkel(null, "ebay", 2L)
+        );
+
+        winkelRepository.saveAll(winkelList);
     }
 
     public List<WinkelResponse> getWinkels() {

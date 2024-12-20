@@ -33,4 +33,6 @@ public class WinkelController {
     public WinkelResponse addWinkel(@RequestBody WinkelRequest winkelRequest) {
         return winkelService.addWinkel(winkelRequest);
     }
+
+
 }

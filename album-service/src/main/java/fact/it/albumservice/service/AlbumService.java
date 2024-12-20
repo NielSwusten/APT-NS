@@ -22,8 +22,14 @@ public class AlbumService {
 
     private final AlbumRepository albumRepository;
 
+    public void clearAllData() {
+        winkelRepository.deleteAll();
+    }
+
     @PostConstruct
     public void loadData() {
+        clearAllData(); // Ensure all old data is removed before loading new data
+
         if (albumRepository.count() == 0) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
