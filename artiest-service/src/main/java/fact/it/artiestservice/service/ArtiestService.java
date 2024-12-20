@@ -20,6 +20,7 @@
 
         private final ArtiestRepository artiestRepository;
 
+
         @PostConstruct
         public void loadData() {
             if (artiestRepository.count() <= 0) {

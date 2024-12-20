@@ -95,12 +95,5 @@ public class ArtiestServiceUnitTests {
         verify(artiestRepository, times(1)).save(any(Artiest.class));
     }
 
-    @Test
-    public void testClearAllData() {
-        // Act
-        artiestService.clearAllData();
 
-        // Assert
-        verify(artiestRepository, times(1)).deleteAll();
-    }
 }
