@@ -18,9 +18,12 @@ public class Winkel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "winkel_id") // Foreign key in Album table
-    private List<Album> albums;
+    // Change from a single ID to a list of album IDs
+    @ElementCollection
+    @CollectionTable(name = "winkel_albums", joinColumns = @JoinColumn(name = "winkel_id"))
+    @Column(name = "album_id")
+    private List<Long> albumIds; // List to store multiple album IDs
 }

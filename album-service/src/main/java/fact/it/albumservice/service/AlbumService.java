@@ -28,13 +28,13 @@ public class AlbumService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
             List<Album> albumList = List.of(
-                    new Album(null, "2", "Break", LocalDate.parse("2006-10-01", formatter)),
-                    new Album(null, "1", "The one", LocalDate.parse("1993-01-15", formatter)),
-                    new Album(null, "1", "final count", LocalDate.parse("1989-05-06", formatter)),
-                    new Album(null, "3", "dusk til dawn", LocalDate.parse("1999-09-01", formatter)),
-                    new Album(null, "3", "breakout", LocalDate.parse("2005-08-12", formatter)),
-                    new Album(null, "2", "dance off", LocalDate.parse("1999-10-10", formatter)),
-                    new Album(null, "4", "fall off", LocalDate.parse("1999-08-02", formatter))
+                    new Album(null, "67436f443474646a729fac18", "Break", LocalDate.parse("2006-10-01", formatter)),
+                    new Album(null, "67436f443474646a729fac19", "The one", LocalDate.parse("1993-01-15", formatter)),
+                    new Album(null, "67436f443474646a729fac18", "final count", LocalDate.parse("1989-05-06", formatter)),
+                    new Album(null, "67436f443474646a729fac19", "dusk til dawn", LocalDate.parse("1999-09-01", formatter)),
+                    new Album(null, "67436f443474646a729fac1b", "breakout", LocalDate.parse("2005-08-12", formatter)),
+                    new Album(null, "67436f443474646a729fac18", "dance off", LocalDate.parse("1999-10-10", formatter)),
+                    new Album(null, "67436f443474646a729fac1b", "fall off", LocalDate.parse("1999-08-02", formatter))
             );
 
             albumRepository.saveAll(albumList);
