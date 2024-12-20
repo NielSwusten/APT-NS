@@ -81,3 +81,4 @@ public class WinkelService {
     private AlbumResponse mapToAlbumResponse(Album album) {
         return new AlbumResponse(album.getId(), album.getAlbumName(), album.getArtiestId());
     }
+}
