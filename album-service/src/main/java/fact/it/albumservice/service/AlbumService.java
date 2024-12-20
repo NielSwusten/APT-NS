@@ -23,7 +23,7 @@ public class AlbumService {
     private final AlbumRepository albumRepository;
 
     public void clearAllData() {
-        winkelRepository.deleteAll();
+        albumRepository.deleteAll();
     }
 
     @PostConstruct
