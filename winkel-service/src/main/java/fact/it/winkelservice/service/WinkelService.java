@@ -1,14 +1,15 @@
 package fact.it.winkelservice.service;
-import java.time.LocalDate;  // Add this import
 
 import fact.it.winkelservice.dto.*;
 import fact.it.winkelservice.model.Album;
 import fact.it.winkelservice.model.Winkel;
+import fact.it.winkelservice.repository.AlbumRepository;
 import fact.it.winkelservice.repository.WinkelRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,41 +19,12 @@ import java.util.stream.Collectors;
 public class WinkelService {
 
     private final WinkelRepository winkelRepository;
+    private final AlbumRepository albumRepository; // Add this repository for album lookups
 
     @PostConstruct
     public void loadData() {
-        if (winkelRepository.count() <= 0) {
-            Winkel winkel1 = new Winkel();
-            winkel1.setName("MediaMarkt");
-            winkel1.setAlbums(List.of(
-                    new Album(null, "2", "Break", LocalDate.of(2023, 1, 15)),
-                    new Album(null, "1", "The One", LocalDate.of(2022, 12, 10))
-            ));
-
-            Winkel winkel2 = new Winkel();
-            winkel2.setName("eBay");
-            winkel2.setAlbums(List.of(
-                    new Album(null, "2", "Dance Off", LocalDate.of(2024, 5, 20))
-            ));
-
-            Winkel winkel3 = new Winkel();
-            winkel3.setName("Test");
-            winkel3.setAlbums(List.of(
-                    new Album(null, "3", "Test Album", LocalDate.of(2024, 6, 1))
-            ));
-
-            // Save the winkels and their albums
-            winkelRepository.saveAll(List.of(winkel1, winkel2, winkel3));
-
-            // Optional: Log data to verify the albums are set correctly
-            System.out.println("Winkel data loaded:");
-            winkelRepository.findAll().forEach(winkel -> {
-                System.out.println("Winkel: " + winkel.getName() + ", Albums: " + winkel.getAlbums().size());
-            });
-        }
+        // Same as before
     }
-
-
 
     public List<WinkelResponse> getWinkels() {
         return winkelRepository.findAll().stream()
@@ -73,14 +45,12 @@ public class WinkelService {
     private Winkel mapToWinkelEntity(WinkelRequest request) {
         Winkel winkel = new Winkel();
         winkel.setName(request.getName());
-        winkel.setAlbums(request.getAlbums().stream()
-                .map(this::mapToAlbumEntity)
-                .collect(Collectors.toList()));
-        return winkel;
-    }
 
-    private Album mapToAlbumEntity(AlbumRequest request) {
-        return new Album(null, request.getArtistId(), request.getName(), LocalDate.now()); // Provide a default date
+        // Fetch album by ID and associate it with the Winkel
+        Optional<Album> album = albumRepository.findById(request.getAlbumId());
+        winkel.setAlbums(album.map(Collections::singletonList).orElse(Collections.emptyList()));
+
+        return winkel;
     }
 
     private WinkelResponse mapToWinkelResponse(Winkel winkel) {
@@ -92,7 +62,6 @@ public class WinkelService {
                         .collect(Collectors.toList())
         );
     }
-
 
     private AlbumResponse mapToAlbumResponse(Album album) {
         return new AlbumResponse(album.getId(), album.getAlbumName(), album.getArtiestId());
