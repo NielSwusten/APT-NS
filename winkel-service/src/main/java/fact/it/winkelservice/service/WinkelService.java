@@ -35,9 +35,23 @@ public class WinkelService {
                     new Album(null, "2", "Dance Off", LocalDate.of(2024, 5, 20))
             ));
 
-            winkelRepository.saveAll(List.of(winkel1, winkel2));
+            Winkel winkel3 = new Winkel();
+            winkel3.setName("Test");
+            winkel3.setAlbums(List.of(
+                    new Album(null, "3", "Test Album", LocalDate.of(2024, 6, 1))
+            ));
+
+            // Save the winkels and their albums
+            winkelRepository.saveAll(List.of(winkel1, winkel2, winkel3));
+
+            // Optional: Log data to verify the albums are set correctly
+            System.out.println("Winkel data loaded:");
+            winkelRepository.findAll().forEach(winkel -> {
+                System.out.println("Winkel: " + winkel.getName() + ", Albums: " + winkel.getAlbums().size());
+            });
         }
     }
+
 
 
     public List<WinkelResponse> getWinkels() {
@@ -78,6 +92,7 @@ public class WinkelService {
                         .collect(Collectors.toList())
         );
     }
+
 
     private AlbumResponse mapToAlbumResponse(Album album) {
         return new AlbumResponse(album.getId(), album.getAlbumName(), album.getArtiestId());
