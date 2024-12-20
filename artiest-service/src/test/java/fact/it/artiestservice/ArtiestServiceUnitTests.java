@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,66 +30,75 @@ public class ArtiestServiceUnitTests {
 
     @BeforeEach
     public void setUp() {
-        artiest = new Artiest("1", "Billy", "The one and only", LocalDate.of(2001, 2, 1));
+        artiest = new Artiest(1L, "John Doe", 1L);
     }
 
     @Test
-    public void testGetArtiests() {
+    public void testGetArtiesten() {
         // Arrange
-        Artiest artiest2 = new Artiest("2", "Jason", "The only singer in town", LocalDate.of(1993, 11, 14));
+        Artiest artiest2 = new Artiest(2L, "Jane Doe", 2L);
         when(artiestRepository.findAll()).thenReturn(List.of(artiest, artiest2));
 
         // Act
-        List<ArtiestResponse> artiestResponses = artiestService.getArtiests();
+        List<ArtiestResponse> artiestResponses = artiestService.getArtiesten();
 
         // Assert
         assertEquals(2, artiestResponses.size());
-        assertEquals("Billy", artiestResponses.get(0).getName());
-        assertEquals("Jason", artiestResponses.get(1).getName());
+        assertEquals("John Doe", artiestResponses.get(0).getName());
+        assertEquals("Jane Doe", artiestResponses.get(1).getName());
         verify(artiestRepository, times(1)).findAll();
     }
 
     @Test
     public void testGetArtiestById() {
         // Arrange
-        when(artiestRepository.findById("1")).thenReturn(Optional.of(artiest));
+        when(artiestRepository.findById(1L)).thenReturn(Optional.of(artiest));
 
         // Act
-        Optional<ArtiestResponse> result = artiestService.getArtiestById("1");
+        Optional<ArtiestResponse> result = artiestService.getArtiestById(1L);
 
         // Assert
         assertTrue(result.isPresent());
-        assertEquals("Billy", result.get().getName());
-        verify(artiestRepository, times(1)).findById("1");
+        assertEquals("John Doe", result.get().getName());
+        verify(artiestRepository, times(1)).findById(1L);
     }
 
     @Test
     public void testGetArtiestById_NotFound() {
         // Arrange
-        when(artiestRepository.findById("999")).thenReturn(Optional.empty());
+        when(artiestRepository.findById(999L)).thenReturn(Optional.empty());
 
         // Act
-        Optional<ArtiestResponse> result = artiestService.getArtiestById("999");
+        Optional<ArtiestResponse> result = artiestService.getArtiestById(999L);
 
         // Assert
         assertFalse(result.isPresent());
-        verify(artiestRepository, times(1)).findById("999");
+        verify(artiestRepository, times(1)).findById(999L);
     }
 
     @Test
     public void testAddArtiest() {
         // Arrange
-        ArtiestRequest request = new ArtiestRequest("Todd", "Lost in space", LocalDate.of(1989, 7, 5));
-        Artiest savedArtiest = new Artiest("2", "Todd", "Lost in space", LocalDate.of(1989, 7, 5));
+        ArtiestRequest request = new ArtiestRequest("Ariana Grande", 3L);
+        Artiest savedArtiest = new Artiest(3L, "Ariana Grande", 3L);
         when(artiestRepository.save(any(Artiest.class))).thenReturn(savedArtiest);
 
         // Act
         ArtiestResponse response = artiestService.addArtiest(request);
 
         // Assert
-        assertEquals("Todd", response.getName());
-        assertEquals("Lost in space", response.getDescription());
-        assertEquals("2", response.getId());
+        assertEquals("Ariana Grande", response.getName());
+        assertEquals(3L, response.getAlbumId());
+        assertEquals(3L, response.getId());
         verify(artiestRepository, times(1)).save(any(Artiest.class));
+    }
+
+    @Test
+    public void testClearAllData() {
+        // Act
+        artiestService.clearAllData();
+
+        // Assert
+        verify(artiestRepository, times(1)).deleteAll();
     }
 }
