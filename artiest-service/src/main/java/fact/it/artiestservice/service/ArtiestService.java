@@ -26,10 +26,10 @@ public class ArtiestService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
             List<Artiest> artiestList = List.of(
-                    new Artiest(null, "billy", "the one and only", LocalDate.parse("2001-02-01", formatter)),
-                    new Artiest(null, "jason", "The only singer in town", LocalDate.parse("1993-11-14", formatter)),
-                    new Artiest(null, "todd hill", "lost in space", LocalDate.parse("1989-07-05", formatter)),
-                    new Artiest(null, "bernie", "too old to sing", LocalDate.parse("1952-02-18", formatter))
+                    new Artiest(1L, "billy", "the one and only", LocalDate.parse("2001-02-01", formatter)),
+                    new Artiest(2L, "jason", "The only singer in town", LocalDate.parse("1993-11-14", formatter)),
+                    new Artiest(3L, "todd hill", "lost in space", LocalDate.parse("1989-07-05", formatter)),
+                    new Artiest(4L, "bernie", "too old to sing", LocalDate.parse("1952-02-18", formatter))
             );
 
             artiestRepository.saveAll(artiestList);
@@ -42,14 +42,19 @@ public class ArtiestService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<ArtiestResponse> getArtiestById(String id) {
+    public Optional<ArtiestResponse> getArtiestById(Long id) {
         return artiestRepository.findById(id).map(this::mapToArtiestResponse);
     }
 
     public ArtiestResponse addArtiest(ArtiestRequest artiestRequest) {
         Artiest artiest = mapToArtiestEntity(artiestRequest);
+        artiest.setId(generateNewId()); // Generate a new numeric ID
         Artiest savedArtiest = artiestRepository.save(artiest);
         return mapToArtiestResponse(savedArtiest);
+    }
+
+    private Long generateNewId() {
+        return artiestRepository.count() + 1; // Simple ID generation strategy
     }
 
     private Artiest mapToArtiestEntity(ArtiestRequest request) {
