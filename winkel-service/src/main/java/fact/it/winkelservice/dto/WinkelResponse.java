@@ -12,5 +12,6 @@ import java.util.List;
 public class WinkelResponse {
     private Long id;
     private String name;
-    private List<AlbumResponse> albums;
+    private List<AlbumResponse> albums; // List of album responses
 }
+

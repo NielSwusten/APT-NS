@@ -35,6 +35,10 @@ public class WinkelService {
     }
 
     public Winkel addWinkel(Winkel winkel) {
+        // Ensure `albumIds` is not null for new entities
+        if (winkel.getAlbumIds() == null) {
+            winkel.setAlbumIds(List.of());
+        }
         return winkelRepository.save(winkel);
     }
 
