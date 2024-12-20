@@ -17,10 +17,11 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
-        <!-- Spring Boot JPA starter -->
+
+        <!-- Spring Boot Starter for MongoDB -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
         <!-- Spring Boot Web starter -->
@@ -36,14 +37,11 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Removed spring-context version declaration -->
-        <!-- Spring Boot will manage the correct version of spring-context -->
-
         <!-- Mockito for testing -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>5.0.0</version> <!-- Compatible with Spring Boot 3.x -->
+            <version>5.0.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -51,13 +49,13 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.2</version> <!-- Update to the latest version if necessary -->
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.8.2</version> <!-- Ensure you use the version compatible with JUnit 5 -->
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
 
@@ -74,7 +72,9 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
     </dependencies>
+
 
     <build>
         <plugins>
