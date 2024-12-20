@@ -1,7 +1,6 @@
 package fact.it.winkelservice.controller;
 
-
-import fact.it.winkelservice.model.Winkel;
+import fact.it.winkelservice.dto.*;
 import fact.it.winkelservice.service.WinkelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,26 +11,25 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/winkel")
-
 @RequiredArgsConstructor
 public class WinkelController {
     private final WinkelService winkelService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Winkel> getAllWinkels(){
+    public List<WinkelResponse> getAllWinkels() {
         return winkelService.getWinkels();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Winkel> getWinkelById(@PathVariable Long id) {
+    public Optional<WinkelResponse> getWinkelById(@PathVariable Long id) {
         return winkelService.getWinkelById(id);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
-    public void addWinkel(@RequestBody Winkel winkel) {
-        winkelService.addWinkel(winkel);
+    @ResponseStatus(HttpStatus.CREATED)
+    public WinkelResponse addWinkel(@RequestBody WinkelRequest winkelRequest) {
+        return winkelService.addWinkel(winkelRequest);
     }
 }

@@ -1,11 +1,12 @@
 package fact.it.winkelservice.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "winkel")
@@ -18,4 +19,8 @@ public class Winkel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "winkel_id") // Foreign key in Album table
+    private List<Album> albums;
 }

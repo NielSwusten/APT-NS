@@ -1,7 +1,7 @@
 package fact.it.artiestservice.controller;
 
-
-import fact.it.artiestservice.model.Artiest;
+import fact.it.artiestservice.dto.ArtiestRequest;
+import fact.it.artiestservice.dto.ArtiestResponse;
 import fact.it.artiestservice.service.ArtiestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,19 +18,19 @@ public class ArtiestController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Artiest> getAllArtiests(){
+    public List<ArtiestResponse> getAllArtiests() {
         return artiestService.getArtiests();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Artiest> getArtiestById(@PathVariable String id) {
+    public Optional<ArtiestResponse> getArtiestById(@PathVariable String id) {
         return artiestService.getArtiestById(id);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
-    public void addArtiest(@RequestBody Artiest artiest) {
-        artiestService.addArtiest(artiest);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ArtiestResponse addArtiest(@RequestBody ArtiestRequest artiestRequest) {
+        return artiestService.addArtiest(artiestRequest);
     }
 }
