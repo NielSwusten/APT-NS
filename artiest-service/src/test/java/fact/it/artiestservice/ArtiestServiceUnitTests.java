@@ -36,13 +36,13 @@ public class ArtiestServiceUnitTests {
     }
 
     @Test
-    public void testGetArtiesten() {
+    public void testGetArtiests() {
         // Arrange
         Artiest artiest2 = new Artiest(null, "Jane Doe", "Another description", LocalDate.of(1985, 5, 15));
         when(artiestRepository.findAll()).thenReturn(List.of(artiest, artiest2));
 
         // Act
-        List<ArtiestResponse> artiestResponses = artiestService.getArtiesten();
+        List<ArtiestResponse> artiestResponses = artiestService.getArtiests();
 
         // Assert
         assertEquals(2, artiestResponses.size());
