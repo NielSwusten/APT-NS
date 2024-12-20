@@ -2,8 +2,12 @@ package fact.it.artiestservice.model;
 
 import lombok.*;
 import java.time.LocalDate;
+
+
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "artiest")
 @AllArgsConstructor
@@ -13,8 +17,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Artiest {
 
     @Id
-    private Long id; // Changed from String to Long
+    private String id;
     private String name;
     private String description;
     private LocalDate dateOfBirth;
+
 }

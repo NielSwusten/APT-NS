@@ -42,19 +42,14 @@ public class ArtiestService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<ArtiestResponse> getArtiestById(Long id) {
+    public Optional<ArtiestResponse> getArtiestById(String id) {
         return artiestRepository.findById(id).map(this::mapToArtiestResponse);
     }
 
     public ArtiestResponse addArtiest(ArtiestRequest artiestRequest) {
         Artiest artiest = mapToArtiestEntity(artiestRequest);
-        artiest.setId(generateNewId()); // Generate a new numeric ID
         Artiest savedArtiest = artiestRepository.save(artiest);
         return mapToArtiestResponse(savedArtiest);
-    }
-
-    private Long generateNewId() {
-        return artiestRepository.count() + 1; // Simple ID generation strategy
     }
 
     private Artiest mapToArtiestEntity(ArtiestRequest request) {
