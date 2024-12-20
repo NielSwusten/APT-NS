@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WinkelRequest {
     private String name;
-    private List<Long> albumIds; // Allow multiple album IDs
+    private Long albumId; // Single album ID
 }

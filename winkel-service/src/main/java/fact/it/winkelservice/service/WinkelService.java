@@ -1,4 +1,7 @@
-import fact.it.winkelservice.dto.*;
+package fact.it.winkelservice.service;
+
+import fact.it.winkelservice.dto.WinkelRequest;
+import fact.it.winkelservice.dto.WinkelResponse;
 import fact.it.winkelservice.model.Winkel;
 import fact.it.winkelservice.repository.WinkelRepository;
 import jakarta.annotation.PostConstruct;
@@ -19,58 +22,36 @@ public class WinkelService {
     public void loadData() {
         if (winkelRepository.count() <= 0) {
             List<Winkel> winkelList = List.of(
-                    new Winkel(null, "Mediamarkt", List.of(1L, 2L)), // Example albums
-                    new Winkel(null, "Ebay", List.of(3L))
+                    new Winkel(null, "mediamarkt", 1L),
+                    new Winkel(null, "ebay", 2L)
             );
+
             winkelRepository.saveAll(winkelList);
         }
     }
 
     public List<WinkelResponse> getWinkels() {
-        return winkelRepository.findAll().stream()
-                .map(this::mapToResponse)
+        return winkelRepository.findAll()
+                .stream()
+                .map(this::toWinkelResponse)
                 .collect(Collectors.toList());
     }
 
     public Optional<WinkelResponse> getWinkelById(Long id) {
         return winkelRepository.findById(id)
-                .map(this::mapToResponse);
+                .map(this::toWinkelResponse);
     }
 
     public WinkelResponse addWinkel(WinkelRequest winkelRequest) {
-        Winkel winkel = mapToEntity(winkelRequest);
-        Winkel savedWinkel = winkelRepository.save(winkel);
-        return mapToResponse(savedWinkel);
+        Winkel winkel = toWinkel(winkelRequest);
+        return toWinkelResponse(winkelRepository.save(winkel));
     }
 
-    public WinkelResponse updateWinkelAlbums(Long id, List<Long> albumIds) {
-        Winkel updatedWinkel = winkelRepository.findById(id)
-                .map(winkel -> {
-                    winkel.setAlbumIds(albumIds);
-                    return winkelRepository.save(winkel);
-                })
-                .orElseThrow(() -> new RuntimeException("Winkel not found"));
-        return mapToResponse(updatedWinkel);
+    private Winkel toWinkel(WinkelRequest request) {
+        return new Winkel(null, request.getName(), request.getAlbumId());
     }
 
-    // Helper to map Winkel to WinkelResponse
-    private WinkelResponse mapToResponse(Winkel winkel) {
-        List<AlbumResponse> albumResponses = winkel.getAlbumIds().stream()
-                .map(AlbumResponse::new) // Convert album IDs to AlbumResponse
-                .collect(Collectors.toList());
-        return new WinkelResponse(
-                winkel.getId(),
-                winkel.getName(),
-                albumResponses
-        );
-    }
-
-    // Helper to map WinkelRequest to Winkel
-    private Winkel mapToEntity(WinkelRequest winkelRequest) {
-        return new Winkel(
-                null, // ID will be auto-generated
-                winkelRequest.getName(),
-                winkelRequest.getAlbumIds() != null ? winkelRequest.getAlbumIds() : List.of()
-        );
+    private WinkelResponse toWinkelResponse(Winkel winkel) {
+        return new WinkelResponse(winkel.getId(), winkel.getName(), winkel.getAlbumId());
     }
 }

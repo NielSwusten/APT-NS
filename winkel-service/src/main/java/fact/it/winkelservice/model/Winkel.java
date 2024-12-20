@@ -18,12 +18,7 @@ public class Winkel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
+    private Long albumId;
 
-    // Change from a single ID to a list of album IDs
-    @ElementCollection
-    @CollectionTable(name = "winkel_albums", joinColumns = @JoinColumn(name = "winkel_id"))
-    @Column(name = "album_id")
-    private List<Long> albumIds; // List to store multiple album IDs
 }

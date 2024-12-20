@@ -1,6 +1,7 @@
 package fact.it.winkelservice.controller;
 
-import fact.it.winkelservice.dto.*;
+import fact.it.winkelservice.dto.WinkelRequest;
+import fact.it.winkelservice.dto.WinkelResponse;
 import fact.it.winkelservice.service.WinkelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
