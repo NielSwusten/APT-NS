@@ -20,6 +20,11 @@ public class Album {
     private String albumName;
     private LocalDate releaseDate;
 
-
+    // Add this constructor
+    public Album(Long id, String artiestId, String albumName) {
+        this.id = id;
+        this.artiestId = artiestId;
+        this.albumName = albumName;
+    }
 }
 

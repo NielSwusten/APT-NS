@@ -21,23 +21,23 @@ public class WinkelService {
     @PostConstruct
     public void loadData() {
         if (winkelRepository.count() <= 0) {
-            // Initialize test data
             Winkel winkel1 = new Winkel();
             winkel1.setName("MediaMarkt");
             winkel1.setAlbums(List.of(
-                    new Album(null, "Break", "2"),
-                    new Album(null, "The One", "1")
+                    new Album(null, "2", "Break", LocalDate.of(2023, 1, 15)),
+                    new Album(null, "1", "The One", LocalDate.of(2022, 12, 10))
             ));
 
             Winkel winkel2 = new Winkel();
             winkel2.setName("eBay");
             winkel2.setAlbums(List.of(
-                    new Album(null, "Dance Off", "2")
+                    new Album(null, "2", "Dance Off", LocalDate.of(2024, 5, 20))
             ));
 
             winkelRepository.saveAll(List.of(winkel1, winkel2));
         }
     }
+
 
     public List<WinkelResponse> getWinkels() {
         return winkelRepository.findAll().stream()
@@ -65,7 +65,7 @@ public class WinkelService {
     }
 
     private Album mapToAlbumEntity(AlbumRequest request) {
-        return new Album(null, request.getName(), request.getArtistId());
+        return new Album(null, request.getArtistId(), request.getName(), LocalDate.now()); // Provide a default date
     }
 
     private WinkelResponse mapToWinkelResponse(Winkel winkel) {
@@ -79,6 +79,5 @@ public class WinkelService {
     }
 
     private AlbumResponse mapToAlbumResponse(Album album) {
-        return new AlbumResponse(album.getId(), album.getName(), album.getArtistId());
+        return new AlbumResponse(album.getId(), album.getAlbumName(), album.getArtiestId());
     }
-}
