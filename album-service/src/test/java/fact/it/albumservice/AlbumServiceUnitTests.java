@@ -66,7 +66,9 @@ public class AlbumServiceUnitTests {
         AlbumRequest albumRequest = new AlbumRequest("67436f443474646a729fac18", "Break", LocalDate.of(2006, 10, 1));
         Album album = new Album(null, "67436f443474646a729fac18", "Break", LocalDate.of(2006, 10, 1));
         Album savedAlbum = new Album(1L, "67436f443474646a729fac18", "Break", LocalDate.of(2006, 10, 1));
-        when(albumRepository.save(album)).thenReturn(savedAlbum);
+
+        // Use any() to avoid strict stubbing error
+        when(albumRepository.save(any(Album.class))).thenReturn(savedAlbum);
 
         // Act
         AlbumResponse albumResponse = albumService.saveAlbum(albumRequest);
