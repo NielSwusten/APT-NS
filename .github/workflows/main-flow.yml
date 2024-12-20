@@ -16,7 +16,7 @@ jobs:
           java-version: 17
           cache: maven
           distribution: adopt
-      
+
       - name: Run Unit Tests
         working-directory: ./album-service
         run: mvn test -B
@@ -48,9 +48,13 @@ jobs:
           cache: maven
           distribution: adopt
 
+      - name: Run Unit Tests
+        working-directory: ./artiest-service
+        run: mvn test -B
+
       - name: Build, test and package project
         working-directory: ./artiest-service
-        run: mvn package -B -DskipTests=true
+        run: mvn package -B
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
@@ -74,11 +78,15 @@ jobs:
           java-version: 17
           cache: maven
           distribution: adopt
-        
+
+      - name: Run Unit Tests
+        working-directory: ./winkel-service
+        run: mvn test -B
+
       - name: Build, test and package project
         working-directory: ./winkel-service
-        run: mvn package -B -DskipTests=true
-        
+        run: mvn package -B
+
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
