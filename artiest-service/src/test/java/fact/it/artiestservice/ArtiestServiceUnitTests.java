@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,13 +31,13 @@ public class ArtiestServiceUnitTests {
 
     @BeforeEach
     public void setUp() {
-        artiest = new Artiest(1L, "John Doe", 1L);
+        artiest = new Artiest("1", "John Doe", "A description", LocalDate.of(1990, 1, 1));  // Correct constructor
     }
 
     @Test
     public void testGetArtiesten() {
         // Arrange
-        Artiest artiest2 = new Artiest(2L, "Jane Doe", 2L);
+        Artiest artiest2 = new Artiest("2", "Jane Doe", "Another description", LocalDate.of(1985, 5, 15));
         when(artiestRepository.findAll()).thenReturn(List.of(artiest, artiest2));
 
         // Act
@@ -52,35 +53,35 @@ public class ArtiestServiceUnitTests {
     @Test
     public void testGetArtiestById() {
         // Arrange
-        when(artiestRepository.findById(1L)).thenReturn(Optional.of(artiest));
+        when(artiestRepository.findById("1")).thenReturn(Optional.of(artiest));
 
         // Act
-        Optional<ArtiestResponse> result = artiestService.getArtiestById(1L);
+        Optional<ArtiestResponse> result = artiestService.getArtiestById("1");
 
         // Assert
         assertTrue(result.isPresent());
         assertEquals("John Doe", result.get().getName());
-        verify(artiestRepository, times(1)).findById(1L);
+        verify(artiestRepository, times(1)).findById("1");
     }
 
     @Test
     public void testGetArtiestById_NotFound() {
         // Arrange
-        when(artiestRepository.findById(999L)).thenReturn(Optional.empty());
+        when(artiestRepository.findById("999")).thenReturn(Optional.empty());
 
         // Act
-        Optional<ArtiestResponse> result = artiestService.getArtiestById(999L);
+        Optional<ArtiestResponse> result = artiestService.getArtiestById("999");
 
         // Assert
         assertFalse(result.isPresent());
-        verify(artiestRepository, times(1)).findById(999L);
+        verify(artiestRepository, times(1)).findById("999");
     }
 
     @Test
     public void testAddArtiest() {
         // Arrange
-        ArtiestRequest request = new ArtiestRequest("Ariana Grande", 3L);
-        Artiest savedArtiest = new Artiest(3L, "Ariana Grande", 3L);
+        ArtiestRequest request = new ArtiestRequest("Ariana Grande", "Singer", LocalDate.of(1993, 6, 26));
+        Artiest savedArtiest = new Artiest("3", "Ariana Grande", "Singer", LocalDate.of(1993, 6, 26));
         when(artiestRepository.save(any(Artiest.class))).thenReturn(savedArtiest);
 
         // Act
@@ -88,8 +89,8 @@ public class ArtiestServiceUnitTests {
 
         // Assert
         assertEquals("Ariana Grande", response.getName());
-        assertEquals(3L, response.getAlbumId());
-        assertEquals(3L, response.getId());
+        assertEquals("Singer", response.getDescription());
+        assertEquals("3", response.getId());  // Corrected to match the id type
         verify(artiestRepository, times(1)).save(any(Artiest.class));
     }
 
