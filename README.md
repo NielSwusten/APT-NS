@@ -25,21 +25,21 @@ De microservices communiceren via REST API's en worden beheerd door een API Gate
 De API is toegankelijk via de volgende endpoints:
 
 #### Album Service
-- `GET /albums`: Haalt een lijst van alle albums op.
-- `GET /albums/{id}`: Haalt een specifiek album op via zijn ID.
-- `POST /albums`: Voegt een nieuw album toe.
-- `PUT /albums/{id}`: Werk een album bij.
-- `DELETE /albums/{id}`: Verwijder een album.
+- `GET /album`: Haalt een lijst van alle albums op.
+- `GET /album/{id}`: Haalt een specifiek album op via zijn ID.
+- `POST /album`: Voegt een nieuw album toe.
+- `PUT /album/{id}`: Werk een album bij.
+- `DELETE /album/{id}`: Verwijder een album.
 
 #### Artiest Service
-- `GET /artiesten`: Haalt een lijst van alle artiesten op.
-- `GET /artiesten/{id}`: Haalt een specifieke artiest op via zijn ID.
-- `POST /artiesten`: Voeg een nieuwe artiest toe.
+- `GET /artiest`: Haalt een lijst van alle artiesten op.
+- `GET /artiest/{id}`: Haalt een specifieke artiest op via zijn ID.
+- `POST /artiest`: Voeg een nieuwe artiest toe.
 
 #### Winkel Service
-- `GET /winkels`: Haalt een lijst van alle winkels op.
-- `GET /winkels/{id}`: Haalt een specifieke winkel op via zijn ID.
-- `POST /winkels`: Voeg een nieuwe winkel toe.
+- `GET /winkel`: Haalt een lijst van alle winkels op.
+- `GET /winkel/{id}`: Haalt een specifieke winkel op via zijn ID.
+- `POST /winkel`: Voeg een nieuwe winkel toe.
 
 ### API Gateway
 De API Gateway verzorgt de routing van verzoeken naar de juiste microservice en zorgt voor de beveiliging via **OAuth2**. De GET verzoeken zijn niet beveiligd, maar de andere verzoeken (POST, PUT, DELETE) vereisen authenticatie via OAuth2.
