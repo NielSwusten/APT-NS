@@ -136,11 +136,11 @@ jobs:
           node-version: 18
 
       - name: Run npm install
-        working-directory: ./frontend
+        working-directory: ./Frontend/frontend
         run: npm install
 
       - name: Build frontend
-        working-directory: ./frontend
+        working-directory: ./Frontend/frontend
         run: npm run build
 
       - name: Docker login
