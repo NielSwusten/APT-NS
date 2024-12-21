@@ -96,9 +96,8 @@ services:
 
   frontend:
     image: nielswusten/frontend:latest
-    pull_policy: always
     build:
-      context: ./frontend
+      context: ./react-frontend/frontend
       dockerfile: Dockerfile
       args:
         REACT_APP_API_GATEWAY_URL: http://api-gateway:8080
@@ -109,6 +108,7 @@ services:
     environment:
       REACT_APP_API_GATEWAY_URL: http://api-gateway:8080
 
+#test
 
 volumes:
     mysql_album_data:
