@@ -55,4 +55,10 @@ De API Gateway maakt gebruik van **OAuth2** voor authenticatie. Alleen gebruiker
 ## Front-end
 De front-end van de applicatie is gebouwd in **React** en communiceert met de backend via de API Gateway. De front-end toont gegevens over albums, artiesten en winkels, en laat ingelogde gebruikers albums toevoegen.
 
+## Gehoste Versies
+- **Artiest Service**: [http://localhost:8080/artiest](http://localhost:8080/artiest)
+- **Winkel Service**: [http://localhost:8080/winkel](http://localhost:8080/winkel)
+- **Album Service**: [http://localhost:8080/album](http://localhost:8080/album)
+- **React Front-end**: [http://localhost:3000/](http://localhost:3000/)
+
 
