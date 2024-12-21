@@ -26,10 +26,15 @@ De API is toegankelijk via de volgende endpoints:
 
 #### Album Service
 - `GET /album`: Haalt een lijst van alle albums op.
+  ![image](https://github.com/user-attachments/assets/3e4f5990-e8a9-4167-9b9f-2b46bb265b1a)
 - `GET /album/{id}`: Haalt een specifiek album op via zijn ID.
+  ![image](https://github.com/user-attachments/assets/d0b72bc8-4f99-4383-a751-aa64cd21f7e7)
 - `POST /album`: Voegt een nieuw album toe.
+  ![image](https://github.com/user-attachments/assets/ae990ba4-70bf-4e75-b201-badcb53cafd4)
 - `PUT /album/{id}`: Werk een album bij.
+  ![image](https://github.com/user-attachments/assets/d9fd463c-6a5c-42d7-aecf-beb89c5f98a5)
 - `DELETE /album/{id}`: Verwijder een album.
+  ![image](https://github.com/user-attachments/assets/571d40de-dcc4-4a27-9693-822d08efda2b)
 
 #### Artiest Service
 - `GET /artiest`: Haalt een lijst van alle artiesten op.
