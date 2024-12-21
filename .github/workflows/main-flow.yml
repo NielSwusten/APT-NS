@@ -133,22 +133,26 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'  # Ensure compatibility with react-router
 
       - name: Install dependencies
-        run: npm install
-        working-directory: ./front/frontend  # Adjust if your frontend is in a subfolder
+        run: npm install --unsafe-perm=true
+        working-directory: ./front/frontend
+
+      - name: Fix permissions for react-scripts
+        run: chmod +x node_modules/.bin/react-scripts
 
       - name: Build the React app
         run: npm run build
-        working-directory: ./front/frontend  # Adjust if your frontend is in a subfolder
+        working-directory: ./front/frontend
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/frontend:latest ./frontend  # Adjust path if needed
+        run: docker build -t ${{ secrets.DOCKER_USER }}/frontend:latest ./front/frontend
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/frontend:latest
+
 
