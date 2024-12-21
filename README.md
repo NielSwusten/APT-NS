@@ -76,6 +76,10 @@ De front-end van de applicatie is gebouwd in **React** en communiceert met de ba
 
 ![image](https://github.com/user-attachments/assets/f0f6661b-b06d-49c6-a831-cbeefdb4f2f6)
 
+## Deployment Schema
+
+![image](https://github.com/user-attachments/assets/9c748c7a-fe35-4ba9-bba7-8e1502d5de7e)
+
 ## Gehoste Versies
 - **Artiest Service**: [http://localhost:8080/artiest](http://localhost:8080/artiest)
 - **Winkel Service**: [http://localhost:8080/winkel](http://localhost:8080/winkel)
