@@ -3,6 +3,10 @@
 
 Dit project bestaat uit drie microservices: **Album**, **Artiest** en **Winkel**, en een **React front-end**. Het doel is om een music store systeem op te zetten waar gebruikers albums kunnen bekijken, artiesten kunnen ontdekken en winkels kunnen zien die albums op voorraad hebben. De back-end is gebouwd met microservices en de front-end is een React applicatie.
 
+Uitgewerkte punten
+1. ❔ ALGEMENE EISEN & DOCUMENTATIE (alles samen +60% op Project)
+2.1 Maak een front-end voor je applicatie (ook in container). (+15%)
+   
 ## Overzicht van het project
 
 De applicatie bestaat uit de volgende onderdelen:
@@ -38,13 +42,20 @@ De API is toegankelijk via de volgende endpoints:
 
 #### Artiest Service
 - `GET /artiest`: Haalt een lijst van alle artiesten op.
+  ![image](https://github.com/user-attachments/assets/6a718cfe-18f0-4bcb-9d2c-4545bf897b2b)
 - `GET /artiest/{id}`: Haalt een specifieke artiest op via zijn ID.
+  ![image](https://github.com/user-attachments/assets/2818975a-d7ab-4bed-9606-e980710ab4ce)
 - `POST /artiest`: Voeg een nieuwe artiest toe.
+  ![image](https://github.com/user-attachments/assets/85a19807-d06a-4afe-b799-9062732d8d67)
+
 
 #### Winkel Service
 - `GET /winkel`: Haalt een lijst van alle winkels op.
+  ![image](https://github.com/user-attachments/assets/8c6ed718-02f5-4491-8e69-424cc60603af)
 - `GET /winkel/{id}`: Haalt een specifieke winkel op via zijn ID.
+  ![image](https://github.com/user-attachments/assets/47048f35-a4db-4bc6-8729-7985aef0e685)  
 - `POST /winkel`: Voeg een nieuwe winkel toe.
+  ![image](https://github.com/user-attachments/assets/c3ef3d59-091b-4af4-8ce9-f5107e784e6a)
 
 ### API Gateway
 De API Gateway verzorgt de routing van verzoeken naar de juiste microservice en zorgt voor de beveiliging via **OAuth2**. De GET verzoeken zijn niet beveiligd, maar de andere verzoeken (POST, PUT, DELETE) vereisen authenticatie via OAuth2.
