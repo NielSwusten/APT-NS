@@ -94,6 +94,14 @@ services:
       ALBUM_SERVICE_BASEURL: album-service:8082
       WINKEL_SERVICE_BASEURL: winkel-service:8083
 
+  frontend:
+    build:
+      context: ./front/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80" # Map container's port 80 to host's port 3000
+    depends_on:
+      - api-gateway  # If your frontend depends on the API Gateway
 
 
 
