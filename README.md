@@ -3,10 +3,12 @@
 
 Dit project bestaat uit drie microservices: **Album**, **Artiest** en **Winkel**, en een **React front-end**. Het doel is om een music store systeem op te zetten waar gebruikers albums kunnen bekijken, artiesten kunnen ontdekken en winkels kunnen zien die albums op voorraad hebben. De back-end is gebouwd met microservices en de front-end is een React applicatie.
 
-Uitgewerkte punten
-1. ❔ ALGEMENE EISEN & DOCUMENTATIE (alles samen +60% op Project)
-   
-2.1 Maak een front-end voor je applicatie (ook in container). (+15%)
+Uitgewerkte punten:
+
+
+1)ALGEMENE EISEN & DOCUMENTATIE (alles samen +60% op Project)
+
+2.1) Maak een front-end voor je applicatie (ook in container). (+15%)
    
 ## Overzicht van het project
 
@@ -71,6 +73,8 @@ De API Gateway maakt gebruik van **OAuth2** voor authenticatie. Alleen gebruiker
 
 ## Front-end
 De front-end van de applicatie is gebouwd in **React** en communiceert met de backend via de API Gateway. De front-end toont gegevens over albums, artiesten en winkels, en laat ingelogde gebruikers albums toevoegen.
+
+![image](https://github.com/user-attachments/assets/f0f6661b-b06d-49c6-a831-cbeefdb4f2f6)
 
 ## Gehoste Versies
 - **Artiest Service**: [http://localhost:8080/artiest](http://localhost:8080/artiest)
