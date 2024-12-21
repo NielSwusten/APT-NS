@@ -21,12 +21,6 @@ De microservices communiceren via REST API's en worden beheerd door een API Gate
 - **Artiest Service**: Deze service beheert artiesten en hun gegevens (naam, bio, etc.). De data wordt opgeslagen in een MongoDB database.
 - **Winkel Service**: Deze service beheert de winkels en hun voorraad van albums. De data wordt opgeslagen in een SQL database.
 
-
-### Databases
--SQL: Gebruikt voor de Album Service en Winkel Service om respectievelijk album- en winkelgegevens op te slaan, vanwege de gestructureerde aard van deze data en de onderlinge relaties.
-
--MongoDB: Gebruikt voor de Artiest Service om artiestgegevens op te slaan, aangezien deze vaak semi-gestructureerd zijn en MongoDB meer flexibiliteit biedt voor dergelijke data.
-
 ### API Endpoints
 De API is toegankelijk via de volgende endpoints:
 
@@ -50,9 +44,10 @@ De API is toegankelijk via de volgende endpoints:
 ### API Gateway
 De API Gateway verzorgt de routing van verzoeken naar de juiste microservice en zorgt voor de beveiliging via **OAuth2**. De GET verzoeken zijn niet beveiligd, maar de andere verzoeken (POST, PUT, DELETE) vereisen authenticatie via OAuth2.
 
-## Databases
-- **MongoDB**: Gebruikt voor de **Album Service** om de albumgegevens op te slaan.
-- **SQL**: Gebruikt voor de **Artiest Service** en **Winkel Service** om respectievelijk artiest- en winkelgegevens op te slaan.
+### Databases
+-SQL: Gebruikt voor de Album Service en Winkel Service om respectievelijk album- en winkelgegevens op te slaan, vanwege de gestructureerde aard van deze data en de onderlinge relaties.
+
+-MongoDB: Gebruikt voor de Artiest Service om artiestgegevens op te slaan, aangezien deze vaak semi-gestructureerd zijn en MongoDB meer flexibiliteit biedt voor dergelijke data.
 
 ## Authenticatie
 De API Gateway maakt gebruik van **OAuth2** voor authenticatie. Alleen gebruikers met een geldig OAuth2 token kunnen de POST, PUT en DELETE verzoeken uitvoeren. De GET verzoeken zijn openbaar toegankelijk.
