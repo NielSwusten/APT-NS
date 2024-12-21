@@ -10,11 +10,14 @@ RUN mkdir -p /app/node_modules && chmod 777 /app/node_modules
 # Copy package.json and package-lock.json (or yarn.lock)
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install --unsafe-perm=true
+# Install dependencies (with --unsafe-perm to avoid permission issues)
+RUN npm install --unsafe-perm=true --legacy-peer-deps
 
 # Copy the rest of the application code
 COPY . .
+
+# Check if react-scripts is present (debugging step)
+RUN ls -l node_modules/.bin/
 
 # Build the React application
 RUN npm run build
