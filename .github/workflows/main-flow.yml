@@ -136,18 +136,19 @@ jobs:
           node-version: 18
 
       - name: Run npm install
-        working-directory: ./Frontend/frontend
+        working-directory: ./react-frontend/frontend
         run: npm install
 
       - name: Build frontend
-        working-directory: ./Frontend/frontend
+        working-directory: ./react-frontend/frontend
         run: npm run build
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/frontend:latest ./frontend
+        run: docker build -t ${{ secrets.DOCKER_USER }}/frontend:latest ./react-frontend/frontend
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/frontend:latest
+
