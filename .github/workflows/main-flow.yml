@@ -139,8 +139,8 @@ jobs:
         run: npm install --unsafe-perm=true
         working-directory: ./front/frontend
 
-      - name: Fix permissions for react-scripts
-        run: chmod +x node_modules/.bin/react-scripts
+      - name: Verify react-scripts installation
+        run: ls -l ./front/frontend/node_modules/.bin/react-scripts
 
       - name: Build the React app
         run: npm run build
@@ -154,5 +154,3 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/frontend:latest
-
-
