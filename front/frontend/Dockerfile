@@ -1,14 +1,17 @@
 # Step 1: Build the React app
-FROM node:18 AS build
+FROM node:20 AS build
 
 # Set the working directory
 WORKDIR /app
+
+# Ensure correct permissions for node_modules (helps avoid permission issues)
+RUN mkdir -p /app/node_modules && chmod 777 /app/node_modules
 
 # Copy package.json and package-lock.json (or yarn.lock)
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --unsafe-perm=true
 
 # Copy the rest of the application code
 COPY . .
