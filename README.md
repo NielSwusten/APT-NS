@@ -5,6 +5,7 @@ Dit project bestaat uit drie microservices: **Album**, **Artiest** en **Winkel**
 
 Uitgewerkte punten
 1. ❔ ALGEMENE EISEN & DOCUMENTATIE (alles samen +60% op Project)
+   
 2.1 Maak een front-end voor je applicatie (ook in container). (+15%)
    
 ## Overzicht van het project
