@@ -24,6 +24,7 @@ De microservices communiceren via REST API's en worden beheerd door een API Gate
 
 ### Databases
 -SQL: Gebruikt voor de Album Service en Winkel Service om respectievelijk album- en winkelgegevens op te slaan, vanwege de gestructureerde aard van deze data en de onderlinge relaties.
+
 -MongoDB: Gebruikt voor de Artiest Service om artiestgegevens op te slaan, aangezien deze vaak semi-gestructureerd zijn en MongoDB meer flexibiliteit biedt voor dergelijke data.
 
 ### API Endpoints
