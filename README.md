@@ -6,7 +6,7 @@ Dit project bestaat uit drie microservices: **Album**, **Artiest** en **Winkel**
 ## Overzicht van het project
 
 De applicatie bestaat uit de volgende onderdelen:
-1. **Album Service**: Beheert albums (liedjes) en hun details.
+1. **Album Service**: Beheert albums (liedje) en zijn details.
 2. **Artiest Service**: Beheert artiesten en hun informatie.
 3. **Winkel Service**: Beheert winkels en hun albums.
 4. **Gateway**: Een API Gateway die alle microservices bij elkaar brengt en beveiligt via OAuth2.
